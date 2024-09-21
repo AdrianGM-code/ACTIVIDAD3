@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloques y Cosas - Productos</title>
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="script.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #c0e8e0;
+            padding: 15px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            color: #000;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input {
+            padding: 5px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .search-btn {
+            background-color: #fff;
+            border: none;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .user-menu a {
+            text-decoration: none;
+            font-size: 1rem;
+            color: #000;
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            background-color: #c0e8e0;
+            padding: 10px;
+            justify-content: space-around;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #000;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product-card {
+            background: #ffe0f0;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product-card h2 {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        .product-card p {
+            margin: 5px 0;
+        }
+
+        .price-btn {
+            background-color: #ff6f91;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .price-btn:hover {
+            background-color: #ff5078;
+        }
+
+        .dataTables_wrapper {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        table thead th {
+            background-color: #c0e8e0;
+            padding: 10px;
+        }
+
+        table tbody td {
+            padding: 10px;
+            text-align: center;
+            background-color: #ffe0f0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>BLOQUES Y COSAS</h1>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar...">
+            <button class="search-btn">🔍</button>
+        </div>
+        <div class="user-menu">
+            <a href="#">Identificarse</a>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Figuras</a></li>
+            <li><a href="#">TCG</a></li>
+            <li><a href="#">MEW151</a></li>
+            <li><a href="#">PAR</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>Vista de Tarjetas</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://www.cardtrader.com/uploads/blueprints/image/261377/charizard-ex-special-illustration-rare-199-165-151.jpg" alt="Charizard">
+                <h2>Charizard</h2>
+                <p>MEW151/06</p>
+                <p>Dis: 3</p>
+                <button class="price-btn">$25</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://th.bing.com/th/id/OIP.rI98C_GqrPeuNSLsX8mWJQHaKV?rs=1&pid=ImgDetMain" alt="Ralts">
+                <h2>Ralts</h2>
+                <p>F.060</p>
+                <p>Dis: 1</p>
+                <button class="price-btn">$2</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://img.brickowl.com/files/image_cache/larger/lego-commander-cody-minifigure-192964-28.jpg" alt="Comandante Cody">
+                <h2>Comandante Cody</h2>
+                <p>Set 75452</p>
+                <p>Dis: 1</p>
+                <button class="price-btn">$350</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.wikidexcdn.net/mwuploads/wikidex/thumb/2/26/latest/20200703133237/Blastoise-EX_(XY_Promo_122_TCG).png/430px-Blastoise-EX_(XY_Promo_122_TCG).png" alt="Blastoise">
+                <h2>Blastoise</h2>
+                <p>MEW151/09</p>
+                <p>Dis: 2</p>
+                <button class="price-btn">$35</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://th.bing.com/th/id/OIP.stB8OiMKTDe600C-wGUlHQHaKV?rs=1&pid=ImgDetMain" alt="Gardevoir Ex">
+                <h2>Charmander</h2>
+                <p>MEW/04</p>
+                <p>Dis: 1</p>
+                <button class="price-btn">$10</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://product-images.tcgplayer.com/535085.jpg" alt="Gardevoir Ex">
+                <h2>Gardevoir Ex</h2>
+                <p>PAF233/091</p>
+                <p>Dis: 1</p>
+                <button class="price-btn">$1600</button>
+            </div>
+        </div>
+
+        <h2>Vista de Tabla</h2>
+        <table id="productsTable" class="display">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Código</th>
+                    <th>Disponibilidad</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Charizard</td>
+                    <td>MEW151/06</td>
+                    <td>3</td>
+                    <td>$25</td>
+                </tr>
+                <tr>
+                    <td>Charmander</td>
+                    <td>MEW151/04</td>
+                    <td>4</td>
+                    <td>$5</td>
+                </tr>
+                <tr>
+                    <td>Comandante Cody</td>
+                    <td>Set 75452</td>
+                    <td>1</td>
+                    <td>$350</td>
+                </tr>
+                <tr>
+                    <td>Ralts</td>
+                    <td>F.060</td>
+                    <td>1</td>
+                    <td>$2</td>
+                </tr>
+                <tr>
+                    <td>Blastoise</td>
+                    <td>MEW151/09</td>
+                    <td>2</td>
+                    <td>$35</td>
+                </tr>
+                <tr>
+                    <td>Gardevoir Ex</td>
+                    <td>PAF233/091</td>
+                    <td>1</td>
+                    <td>$1600</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+</body>
+</html>
