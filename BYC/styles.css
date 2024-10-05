@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #c0e8e0;
+    padding: 15px;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    color: #000;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    padding: 5px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.search-btn {
+    background-color: #fff;
+    border: none;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.user-menu a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #000;
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    background-color: #c0e8e0;
+    padding: 10px;
+    justify-content: space-around;
+}
+
+nav a {
+    text-decoration: none;
+    color: #000;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+/* Estilos para la vista de tarjetas */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.product-card {
+    background: #ffe0f0;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.product-card h2 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.product-card p {
+    margin: 5px 0;
+}
+
+.add-cart-btn,
+.price-btn {
+    background-color: #ff6f91;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.add-cart-btn:hover,
+.price-btn:hover {
+    background-color: #ff5078;
+}
+
+/* Estilos para DataTable */
+.dataTables_wrapper {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+table thead th {
+    background-color: #c0e8e0;
+    padding: 10px;
+}
+
+table tbody td {
+    padding: 10px;
+    text-align: center;
+    background-color: #ffe0f0;
+}
