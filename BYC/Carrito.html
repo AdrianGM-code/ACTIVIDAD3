@@ -95,6 +95,7 @@
         </div>
         <div class="user-menu">
             <a href="#">Identificarse</a>
+            <span id="cart-count">Artículos en el carrito: 0</span>
         </div>
     </header>
 
@@ -132,9 +133,16 @@
                 </tfoot>
             </table>
         </div>
+
+        <h3>Historial de productos eliminados</h3>
+        <ul id="historial-eliminados"></ul>
+
     </main>
 
     <script>
+
+        let historialEliminados = [];
+
         function loadCart() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const cartItems = document.getElementById('cart-items');
@@ -163,6 +171,13 @@
 
             cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
 
+            const cartCountEvent = new CustomEvent('cartCount', {
+        detail: {
+            count: cart.reduce((total, product) => total + product.quantity, 0)
+        }
+    });
+    document.dispatchEvent(cartCountEvent);
+
             document.querySelectorAll('.remove-btn').forEach(button => {
                 button.addEventListener('click', function() {
                     const index = this.getAttribute('data-index');
@@ -173,13 +188,23 @@
 
         function removeFromCart(index) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const removedProduct = cart[index];  // Guardar el producto antes de eliminarlo
             cart.splice(index, 1); 
             localStorage.setItem('cart', JSON.stringify(cart));
             loadCart();
+
+            // Disparar el evento personalizado para registrar el historial
+            const productoEliminadoCarrito = new CustomEvent('historialProductoEliminado', {
+                detail: removedProduct
+            });
+            document.dispatchEvent(productoEliminadoCarrito);
         }
 
         window.onload = loadCart;
     </script>
+    <script src="carcount.js"></script>
+    <script src="deleteh.js"></script>
+
 </body>
 </html>
  
