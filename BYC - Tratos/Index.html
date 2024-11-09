@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Bloques y Cosas - Productos</title>
+    <link rel="icon" type="image/x-icon" href="ima/icon32.png">
+    
+    <!-- Estilos y scripts para DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>BLOQUES Y COSAS</h1>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar...">
+            <button class="search-btn">🔍</button>
+        </div>
+        <div class="user-menu">
+            <a href="javascript:void(0);" onclick="openLoginModal()"><img src="ima/Pokedex.png" alt="Icono Identificarse" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">
+                Identificarse</a>
+            <button id="darkModeButton" style="margin-left: 10px;">Activar Modo Oscuro</button>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="Index.html">Inicio</a></li>
+            <li><a href="#">TCG</a></li>
+            <li><a href="#">Figuras</a></li>
+            <li><a href="TABLA.html">Productos</a></li>
+            <li><a href="Carrito.html">Carrito</a></li>
+        </ul>
+    </nav>
+
+    <div id="loginModal" class="login-modal">
+        <div class="login-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Iniciar Sesión / Registro</h2>
+            <form id="loginForm">
+                <label for="name">¿Cómo te llamamos?:</label>
+                <input type="text" id="name" name="name" required>
+            
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+                <small id="passwordHint" class="error-message"></small>
+            
+                <label for="role">Tipo de usuario:</label>
+                <select id="role" name="role" required>
+                    <option value="user">Usuario</option>
+                    <option value="admin">Administrador</option>
+                </select>
+            
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+
+    <main>
+        <h2>Vista de Tarjetas</h2>
+        <div class="product-grid">
+            <!-- Tarjetas de producto aquí -->
+            <!-- Ejemplo: Product Card 1 -->
+            <div class="product-card" data-name="Charizard" data-price="25">
+                <img src="https://th.bing.com/th/id/OIP.-XZhiVHYcTqtq9_TNFS1ewHaKV?rs=1&pid=ImgDetMain" alt="Charizard">
+                <h2>Charizard</h2>
+                <p>MEW151/06</p>
+                <p>Dis: 3</p>
+                <p>Precio: $25</p>
+                <button class="add-cart-btn custom-cursor-btn">Añadir al Carrito</button>
+            </div>
+            <!-- Agregar más tarjetas aquí -->
+        </div>
+    </main>
+
+    <script src="login.js"></script>
+    <script src="cursor.js"></script>
+    <script src="mosc.js"></script>
+
+    <script>
+        // Funciones para abrir y cerrar el modal de login
+        function openLoginModal() {
+            document.getElementById("loginModal").style.display = "block";
+        }
+
+        function closeLoginModal() {
+            document.getElementById("loginModal").style.display = "none";
+        }
+
+        // Manejo de formulario de inicio de sesión
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const password = document.getElementById("password").value;
+            const role = document.getElementById("role").value;
+            const passwordHint = document.getElementById("passwordHint");
+
+            // Expresión regular para validar la contraseña
+            const passwordRegex = /^(?=.*\d).{8,}$/;
+
+            if (!passwordRegex.test(password)) {
+                passwordHint.textContent = "La contraseña debe tener al menos 8 caracteres y contener números.";
+                passwordHint.style.display = "block";
+            } else {
+                passwordHint.style.display = "none";
+
+                // Redirección basada en el rol
+                if (role === "admin") {
+                    window.location.href = "TABLA.html";
+                } else {
+                    window.location.href = "Index.html";
+                }
+
+                alert(`Bienvenido, ${name}`);
+                document.getElementById("loginForm").reset();
+                closeLoginModal();
+            }
+        });
+    </script>
+</body>
+</html>

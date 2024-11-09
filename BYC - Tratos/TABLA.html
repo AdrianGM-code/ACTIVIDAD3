@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloques y Cosas - Productos</title>
+    
+    
+    <!-- Estilos y scripts para DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="login.css">
+    <script src="login.js"></script>
+
+    
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>BLOQUES Y COSAS</h1>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar...">
+            <button class="search-btn">🔍</button>
+        </div>
+        <div class="user-menu">
+            <a href="#">Identificarse</a>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="Index.html">Inicio</a></li>
+            <li><a href="#">TCG</a></li>
+            <li><a href="#">Figuras</a></li>
+            <li><a href="TABLA.html">Productos</a></li>
+            <li><a href="Carrito.html">Carrito</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>Vista de Tarjetas</h2>
+        <div class="product-grid">
+            <!-- Product Card 1 -->
+            <div class="product-card">
+                <img src="https://th.bing.com/th/id/OIP.-XZhiVHYcTqtq9_TNFS1ewHaKV?rs=1&pid=ImgDetMain" alt="Charizard">
+                <h2>Charizard</h2>
+                <p>MEW151/06</p>
+                <p>Dis: 3</p>
+                <p>Precio: $25</p>
+                <button class="add-cart-btn">Añadir al Carrito</button>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="product-card">
+                <img src="https://images.wikidexcdn.net/mwuploads/wikidex/3/3a/latest/20220527072958/Ralts_(Resplandor_Astral_TCG).png" alt="Ralts">
+                <h2>Ralts</h2>
+                <p>F.060</p>
+                <p>Dis: 1</p>
+                <p>Precio: $2</p>
+                <button class="add-cart-btn">Añadir al Carrito</button>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="product-card">
+                <img src="https://img.brickowl.com/files/image_cache/larger/lego-commander-cody-minifigure-192964-28.jpg" alt="Comandante Cody">
+                <h2>Comandante Cody</h2>
+                <p>Set 75452</p>
+                <p>Dis: 1</p>
+                <p>Precio: $350</p>
+                <button class="add-cart-btn">Añadir al Carrito</button>
+            </div>
+
+            <!-- Product Card 4 -->
+            <div class="product-card">
+                <img src="https://images.wikidexcdn.net/mwuploads/wikidex/thumb/2/26/latest/20200703133237/Blastoise-EX_(XY_Promo_122_TCG).png/430px-Blastoise-EX_(XY_Promo_122_TCG).png" alt="Blastoise">
+                <h2>Blastoise</h2>
+                <p>MEW151/09</p>
+                <p>Dis: 2</p>
+                <p>Precio: $35</p>
+                <button class="add-cart-btn">Añadir al Carrito</button>
+            </div>
+
+            <!-- Product Card 5 -->
+            <div class="product-card">
+                <img src="https://den-cards.pokellector.com/384/Gardevoir-ex.PAF.233.51726.png" alt="Gardevoir Ex">
+                <h2>Gardevoir Ex</h2>
+                <p>PAF233/091</p>
+                <p>Dis: 1</p>
+                <p>Precio: $1600</p>
+                <button class="add-cart-btn">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <h2>Vista de Tabla</h2>
+        <table id="productsTable" class="display">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Código</th>
+                    <th>Disponibilidad</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Charizard</td>
+                    <td>MEW151/06</td>
+                    <td>3</td>
+                    <td>$25</td>
+                </tr>
+                <tr>
+                    <td>Charmander</td>
+                    <td>MEW151/04</td>
+                    <td>4</td>
+                    <td>$5</td>
+                </tr>
+                <tr>
+                    <td>Comandante Cody</td>
+                    <td>Set 75452</td>
+                    <td>1</td>
+                    <td>$350</td>
+                </tr>
+                <tr>
+                    <td>Ralts</td>
+                    <td>F.060</td>
+                    <td>1</td>
+                    <td>$2</td>
+                </tr>
+                <tr>
+                    <td>Blastoise</td>
+                    <td>MEW151/09</td>
+                    <td>2</td>
+                    <td>$35</td>
+                </tr>
+                <tr>
+                    <td>Gardevoir Ex</td>
+                    <td>PAF233/091</td>
+                    <td>1</td>
+                    <td>$1600</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        $(document).ready(function() {
+            $('#productsTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true
+            });
+        });
+    </script>
+</body>
+</html>
