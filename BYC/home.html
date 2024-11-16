@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Bloques y Cosas - Productos</title>
+    <link rel="icon" type="image/x-icon" href="ima/icon32.png">
+    
+    <!-- Estilos y scripts para DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>BLOQUES Y COSAS</h1>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar...">
+            <button class="search-btn">🔍</button>
+        </div>
+        <div class="user-menu">
+            <a href="login.html">Cerrar sesión</a>
+
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="home.html">Inicio</a></li>
+            <li><a href="#">TCG</a></li>
+            <li><a href="#">Figuras</a></li>
+            <li><a href="carrito.html">Carrito</a></li>
+        </ul>
+    </nav>
+        
+
+    <main>
+        <h2>Vista de Tarjetas</h2>
+        <div class="product-grid">
+            <div class="product-card" data-name="Charizard" data-price="25">
+                <img src="https://th.bing.com/th/id/OIP.-XZhiVHYcTqtq9_TNFS1ewHaKV?rs=1&pid=ImgDetMain" alt="Charizard">
+                
+                <h2>Charizard</h2>
+                <p>MEW151/06</p>
+                <p>Dis: 3</p>
+                <p>Precio: $25</p>
+                <button class="add-cart-btn custom-cursor-btn">Añadir al Carrito</button>
+                
+            </div>
+
+            <div class="product-card" data-name="Ralts" data-price="2">
+                <img src="https://images.wikidexcdn.net/mwuploads/wikidex/3/3a/latest/20220527072958/Ralts_(Resplandor_Astral_TCG).png" alt="Ralts">
+                
+                <h2>Ralts</h2>
+                <p>F.060</p>
+                <p>Dis: 1</p>
+                <p>Precio: $2</p>
+                <button class="custom-cursor-btn add-cart-btn ">Añadir al Carrito</button>
+                
+            </div>
+
+                <div class="product-card" data-name="Comandante Cody" data-price="350">
+                    <img src="https://img.brickowl.com/files/image_cache/larger/lego-commander-cody-minifigure-192964-28.jpg" alt="Comandante Cody">
+                    
+                    <h2>Comandante Cody</h2>
+                    <p>Set 75452</p>
+                    <p>Precio: $350</p>
+                    <button class="custom-cursor-btn add-cart-btn">Añadir al Carrito</button>
+                    
+                </div>
+
+            <div class="product-card" data-name="Blastoise" data-price="35">
+                <img src="https://images.wikidexcdn.net/mwuploads/wikidex/thumb/2/26/latest/20200703133237/Blastoise-EX_(XY_Promo_122_TCG).png/430px-Blastoise-EX_(XY_Promo_122_TCG).png" alt="Blastoise">
+                
+                <h2>Blastoise</h2>
+                <p>MEW151/09</p>
+                <p>Dis: 2</p>
+                <p>Precio: $35</p>
+                <button class="custom-cursor-btn add-cart-btn ">Añadir al Carrito</button>
+                
+            </div>
+
+            <div class="product-card" data-name="Gardevoir Ex" data-price="1600">
+                <img src="https://den-cards.pokellector.com/384/Gardevoir-ex.PAF.233.51726.png" alt="Gardevoir Ex">
+                
+                <h2>Gardevoir Ex</h2>
+                <p>PAF233/091</p>
+                <p>Dis: 1</p>
+                <p>Precio: $1600</p>
+                <button class=" custom-cursor-btn add-cart-btn">Añadir al Carrito</button>
+                
+            </div>
+        </div>
+
+        <script>
+            
+                
+            const addToCartButtons = document.querySelectorAll('.add-cart-btn');
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productCard = this.parentElement;
+                    const productName = productCard.getAttribute('data-name');
+                    const productPrice = parseFloat(productCard.getAttribute('data-price'));
+
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const existingProduct = cart.find(item => item.name === productName);
+
+                    if (existingProduct) {
+                        existingProduct.quantity += 1;
+                    } else {
+                        cart.push({ name: productName, price: productPrice, quantity: 1 });
+                    }
+
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    alert(`${productName} añadido al carrito`);
+                });
+            });
+        </script>
+        <script src="js/cursor.js"></script>
+    </main>
+
+</body>
+</html>

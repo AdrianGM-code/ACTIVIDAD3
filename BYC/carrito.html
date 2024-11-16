@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link rel="icon" type="image/x-icon" href="ima/icon32.png">
+    
+    <!-- Estilos en línea -->
+    <style>
+        /* Estilos para el header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #c0e8e0;
+            padding: 15px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            color: #000;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input {
+            padding: 5px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .search-btn {
+            background-color: #fff;
+            border: none;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .user-menu a {
+            text-decoration: none;
+            font-size: 1rem;
+            color: #000;
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        /* Estilos para la barra de navegación */
+        nav ul {
+            display: flex;
+            list-style: none;
+            background-color: #c0e8e0;
+            padding: 10px;
+            justify-content: space-around;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #000;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+
+        /* Estilos para la tabla del carrito */
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background-color: pink;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        tfoot td {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>BLOQUES Y COSAS</h1>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar...">
+            <button class="search-btn">🔍</button>
+        </div>
+        <div class="user-menu">
+            <a href="login.html">Cerrar sesión</a>
+            <span id="cart-count">Artículos en el carrito: 0</span>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="home.html">Inicio</a></li>
+            <li><a href="#">TCG</a></li>
+            <li><a href="#">Figuras</a></li>
+            <li><a href="carrito.html">Carrito</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>Tu Carrito</h2>
+        <div id="cart-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items">
+                    <!-- Aquí se insertarán los productos dinámicamente -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">Total de la compra</td>
+                        <td id="cart-total">$0</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <h3>Historial de productos eliminados</h3>
+        <ul id="historial-eliminados"></ul>
+
+    </main>
+
+    <script>
+
+        let historialEliminados = [];
+
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            let totalPrice = 0;
+
+            cartItems.innerHTML = ""; // Limpiar la tabla antes de llenarla
+            cart.forEach((product, index) => {
+                const productTotal = product.price * product.quantity;
+                totalPrice += productTotal;
+
+                const row = `
+                    <tr>
+                        <td>${product.name}</td>
+                        <td>${product.quantity}</td>
+                        <td>$${product.price.toFixed(2)}</td>
+                        <td>$${productTotal.toFixed(2)}</td>
+                        <td>
+                            <button class="remove-btn" data-index="${index}">Eliminar</button>
+                        </td>
+                    </tr>
+                `;
+
+                cartItems.innerHTML += row;
+            });
+
+            cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
+
+            const cartCountEvent = new CustomEvent('cartCount', {
+        detail: {
+            count: cart.reduce((total, product) => total + product.quantity, 0)
+        }
+    });
+    document.dispatchEvent(cartCountEvent);
+
+            document.querySelectorAll('.remove-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    removeFromCart(index);
+                });
+            });
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const removedProduct = cart[index];  // Guardar el producto antes de eliminarlo
+            cart.splice(index, 1); 
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+
+            // Disparar el evento personalizado para registrar el historial
+            const productoEliminadoCarrito = new CustomEvent('historialProductoEliminado', {
+                detail: removedProduct
+            });
+            document.dispatchEvent(productoEliminadoCarrito);
+        }
+
+        window.onload = loadCart;
+    </script>
+    <script src="js/contador.js"></script>
+
+
+</body>
+</html>
